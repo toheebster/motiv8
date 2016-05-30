@@ -18,6 +18,7 @@
 		3E65C79E1CE508CC00D1B409 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65C79A1CE508BF00D1B409 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E7566981CE4F03F00A64DEF /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7566971CE4F03F00A64DEF /* ConsentDocument.swift */; };
 		3E75669A1CE4F9EF00A64DEF /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7566991CE4F9EF00A64DEF /* ConsentTask.swift */; };
+		3EE2D8821CFCC722004C466B /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE2D8811CFCC722004C466B /* SurveyTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		3E65C7931CE508BF00D1B409 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../../ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		3E7566971CE4F03F00A64DEF /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		3E7566991CE4F9EF00A64DEF /* ConsentTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
+		3EE2D8811CFCC722004C466B /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				3E363F101CE4DFAF005D2D26 /* Info.plist */,
 				3E7566971CE4F03F00A64DEF /* ConsentDocument.swift */,
 				3E7566991CE4F9EF00A64DEF /* ConsentTask.swift */,
+				3EE2D8811CFCC722004C466B /* SurveyTask.swift */,
 			);
 			path = motiv8;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			files = (
 				3E363F071CE4DFAE005D2D26 /* ViewController.swift in Sources */,
 				3E75669A1CE4F9EF00A64DEF /* ConsentTask.swift in Sources */,
+				3EE2D8821CFCC722004C466B /* SurveyTask.swift in Sources */,
 				3E7566981CE4F03F00A64DEF /* ConsentDocument.swift in Sources */,
 				3E363F051CE4DFAE005D2D26 /* AppDelegate.swift in Sources */,
 			);

@@ -26,7 +26,7 @@ public var ConsentDocument: ORKConsentDocument {
         .Withdrawing
     ]
     
-    var consentSections: [ORKConsentSection] = consentSectionTypes.map { contentSectionType in
+    let consentSections: [ORKConsentSection] = consentSectionTypes.map { contentSectionType in
         let consentSection = ORKConsentSection(type: contentSectionType)
         //change implementation to have different title & text on each page
         //ok for now
