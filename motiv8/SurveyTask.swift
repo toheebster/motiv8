@@ -72,9 +72,26 @@ public var SurveyTask: ORKOrderedTask {
     let mdQuestion = "What medications are you taking and with what frequency (Please enter all the medications you are taking and the frequency)"
     let mdFormat = ORKTextAnswerFormat()
     let mdStep = ORKQuestionStep(identifier: "MDQuestion", title: mdQuestion, answer: mdFormat)
-    //add placeholder
+//add placeholder
     mdStep.placeholder = "add placeholder here detailing desired format"
     steps += [mdStep]
+    
+    let insulinQuesstion = "Do you inject insulin?"
+    let insulinFormat = ORKBooleanAnswerFormat()
+    let insulinStep = ORKQuestionStep(identifier: "InsulinStep", title: insulinQuesstion, answer: insulinFormat)
+    steps += [insulinStep]
+    
+    // WEIGHT
+    let weightQuestion = "How much do you weigh?"
+    let weightFormat = ORKNumericAnswerFormat(style: ORKNumericAnswerStyle.Integer, unit: "lbs")
+    let weightStep = ORKQuestionStep(identifier: "WeightQuestion", title: weightQuestion , answer: weightFormat)
+    steps += [weightStep]
+    
+    // EXERCISE HABIT (eh)
+    let ehQuestion = "How often do you exercise?"
+    let ehFormat = ORKNumericAnswerFormat(style: ORKNumericAnswerStyle.Integer, unit: "times per week")
+    let ehStep = ORKQuestionStep(identifier: "EHQuestion", title: ehQuestion , answer: ehFormat)
+    steps += [ehStep]
     
     
 
