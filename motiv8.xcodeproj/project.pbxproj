@@ -14,8 +14,6 @@
 		3E363F0F1CE4DFAF005D2D26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E363F0D1CE4DFAF005D2D26 /* LaunchScreen.storyboard */; };
 		3E363F1A1CE4DFAF005D2D26 /* motiv8Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E363F191CE4DFAF005D2D26 /* motiv8Tests.swift */; };
 		3E363F251CE4DFAF005D2D26 /* motiv8UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E363F241CE4DFAF005D2D26 /* motiv8UITests.swift */; };
-		3E65C79D1CE508CC00D1B409 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65C79A1CE508BF00D1B409 /* ResearchKit.framework */; };
-		3E65C79E1CE508CC00D1B409 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65C79A1CE508BF00D1B409 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E7566981CE4F03F00A64DEF /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7566971CE4F03F00A64DEF /* ConsentDocument.swift */; };
 		3E75669A1CE4F9EF00A64DEF /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7566991CE4F9EF00A64DEF /* ConsentTask.swift */; };
 		3EE2D8821CFCC722004C466B /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE2D8811CFCC722004C466B /* SurveyTask.swift */; };
@@ -36,27 +34,6 @@
 			remoteGlobalIDString = 3E363F001CE4DFAE005D2D26;
 			remoteInfo = motiv8;
 		};
-		3E65C7991CE508BF00D1B409 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E65C7931CE508BF00D1B409 /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B183A5951A8535D100C76870;
-			remoteInfo = ResearchKit;
-		};
-		3E65C79B1CE508BF00D1B409 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E65C7931CE508BF00D1B409 /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
-			remoteInfo = ResearchKitTests;
-		};
-		3E65C79F1CE508CC00D1B409 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E65C7931CE508BF00D1B409 /* ResearchKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B183A4731A8535D100C76870;
-			remoteInfo = ResearchKit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3E65C79E1CE508CC00D1B409 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,7 +63,6 @@
 		3E363F201CE4DFAF005D2D26 /* motiv8UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = motiv8UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E363F241CE4DFAF005D2D26 /* motiv8UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = motiv8UITests.swift; sourceTree = "<group>"; };
 		3E363F261CE4DFAF005D2D26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E65C7931CE508BF00D1B409 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../../ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		3E7566971CE4F03F00A64DEF /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		3E7566991CE4F9EF00A64DEF /* ConsentTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
 		3EE2D8811CFCC722004C466B /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
@@ -98,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E65C79D1CE508CC00D1B409 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +96,6 @@
 		3E363EF81CE4DFAE005D2D26 = {
 			isa = PBXGroup;
 			children = (
-				3E65C7931CE508BF00D1B409 /* ResearchKit.xcodeproj */,
 				3E363F031CE4DFAE005D2D26 /* motiv8 */,
 				3E363F181CE4DFAF005D2D26 /* motiv8Tests */,
 				3E363F231CE4DFAF005D2D26 /* motiv8UITests */,
@@ -174,15 +147,6 @@
 			path = motiv8UITests;
 			sourceTree = "<group>";
 		};
-		3E65C7941CE508BF00D1B409 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E65C79A1CE508BF00D1B409 /* ResearchKit.framework */,
-				3E65C79C1CE508BF00D1B409 /* ResearchKitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -198,7 +162,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E65C7A01CE508CC00D1B409 /* PBXTargetDependency */,
 			);
 			name = motiv8;
 			productName = motiv8;
@@ -276,12 +239,6 @@
 			mainGroup = 3E363EF81CE4DFAE005D2D26;
 			productRefGroup = 3E363F021CE4DFAE005D2D26 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3E65C7941CE508BF00D1B409 /* Products */;
-					ProjectRef = 3E65C7931CE508BF00D1B409 /* ResearchKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3E363F001CE4DFAE005D2D26 /* motiv8 */,
@@ -290,23 +247,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3E65C79A1CE508BF00D1B409 /* ResearchKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ResearchKit.framework;
-			remoteRef = 3E65C7991CE508BF00D1B409 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E65C79C1CE508BF00D1B409 /* ResearchKitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ResearchKitTests.xctest;
-			remoteRef = 3E65C79B1CE508BF00D1B409 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3E363EFF1CE4DFAE005D2D26 /* Resources */ = {
@@ -376,11 +316,6 @@
 			isa = PBXTargetDependency;
 			target = 3E363F001CE4DFAE005D2D26 /* motiv8 */;
 			targetProxy = 3E363F211CE4DFAF005D2D26 /* PBXContainerItemProxy */;
-		};
-		3E65C7A01CE508CC00D1B409 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ResearchKit;
-			targetProxy = 3E65C79F1CE508CC00D1B409 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
