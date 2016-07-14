@@ -19,6 +19,13 @@ public var SurveyTask: ORKOrderedTask {
     instructionStep.text = "This survey helps us understand you better for the study"
     //maybe include image here
     steps += [instructionStep]
+        
+    // NAME
+    let nameQuestion = "What is your name?"
+    let nameFormat = ORKTextAnswerFormat()
+    let nameStep = ORKQuestionStep(identifier: "NameQuestion", title: nameQuestion, answer: nameFormat)
+    steps += [nameStep]
+    
     
     // AGE
     let ageQuestion = "How old are you?"
@@ -101,5 +108,7 @@ public var SurveyTask: ORKOrderedTask {
     summaryStep.text = "That was easy!"
     steps += [summaryStep]
     
+    print(nameStep)
     return ORKOrderedTask(identifier: "SurveyTask", steps: steps)
+    
 }
