@@ -9,47 +9,67 @@
 import Foundation
 import UIKit
 import EventKit
+import CoreData
 
 class GoalsDetails: UIViewController {
     
-    var datePicker: UIDatePicker!
-    var reminder: EKReminder!
-    var eventStore: EKEventStore!
+    var goals = [NSManagedObject]()
+    var goalName = String()
+    var goalDescription = String()
+    var goalDueDate: UIDatePicker!
     
-    @IBOutlet var dateTextField: UITextField!
-    @IBOutlet weak var reminderTextView: UITextView!
+    @IBOutlet var goalDateLabel: UITextField!
+    @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet var goalNameLabel: UILabel!
     
-    
-    @IBAction func saveReminder(sender: AnyObject) {
-        self.reminder.title = reminderTextView.text
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let dueDateComponents = appDelegate.dateComponentFromNSDate(self.datePicker.date)
+    // handle if a field is deleted
+    @IBAction func saveGoal(sender: AnyObject) {
         
-        reminder.dueDateComponents = dueDateComponents
-        reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity = NSEntityDescription.entityForName("Goal", inManagedObjectContext: managedContext)
+        let goal = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        goal.setValue(self.goalNameLabel!.text!, forKey: "goal_name")
+        goal.setValue(self.descriptionLabel!.text!, forKey: "goal_description")
+        goal.setValue(self.goalDateLabel!.text!, forKey: "goal_due_date")
         
         do {
-            try self.eventStore.saveReminder(reminder, commit: true)
-            self.navigationController?.popToRootViewControllerAnimated(true)
-        } catch {
-            print("Error saving new reminder : \(error)")
+            try managedContext.save()
+            goals.append(goal)
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
         }
-        
+       
     }
     
+    @IBAction func dismiss(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+
+    }
+    
+    
+    
+    
     override func viewDidLoad() {
-        print("at gd")
+        
         super.viewDidLoad()
-        self.reminderTextView.text = self.reminder.title
-        datePicker = UIDatePicker()
-        datePicker.addTarget(self, action: #selector(GoalsDetails.addDate), forControlEvents: UIControlEvents.ValueChanged)
-        datePicker.datePickerMode = UIDatePickerMode.DateAndTime
-        dateTextField.inputView = datePicker
-        reminderTextView.becomeFirstResponder()
+
+        self.descriptionLabel.text = self.goalDescription
+//        self.goalDateLabel.text = self.goalDueDate.date.description
+        self.goalNameLabel.text = self.goalName
+        
+        
+        goalDueDate = UIDatePicker()
+        goalDueDate.addTarget(self, action: #selector(GoalsDetails.addDate), forControlEvents: UIControlEvents.ValueChanged)
+        goalDueDate.datePickerMode = UIDatePickerMode.DateAndTime
+        goalDateLabel.inputView = goalDueDate
+        descriptionLabel.becomeFirstResponder()
     }
     
     func addDate() {
-        self.dateTextField.text = self.datePicker.date.description
+        self.goalDateLabel.text = self.goalDueDate.date.description
     }
     
     override func didReceiveMemoryWarning() {

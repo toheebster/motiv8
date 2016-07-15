@@ -5,53 +5,77 @@
 //  Created by Okenla, Toheeb on 7/12/16.
 //  Copyright © 2016 Okenla, Toheeb. All rights reserved.
 //
-
+import Foundation
 import UIKit
 import EventKit
+import CoreData
 
 class NewGoal: UIViewController {
-    
-    var eventStore: EKEventStore!
-    var datePicker: UIDatePicker!
-    
-    @IBOutlet weak var reminderTextView: UITextView!
+    var goals = [NSManagedObject]()
+    var goalName = String()
+    var goalDescription = String()
+    var goalDueDate: UIDatePicker!
+
+    @IBOutlet var goalNameTextField: UITextField!
+    @IBOutlet weak var goalDescriptionTextView: UITextView!
     @IBOutlet var dateTextField: UITextField!
     
     
     override func viewDidLoad() {
+        print("did load")
         super.viewDidLoad()
-        datePicker = UIDatePicker()
-        datePicker.addTarget(self, action: #selector(NewGoal.addDate), forControlEvents: UIControlEvents.ValueChanged)
+
+        self.goalNameTextField.placeholder = "What is your goal?"
+        self.dateTextField.placeholder = "Due date"
         
-        datePicker.datePickerMode = UIDatePickerMode.DateAndTime
-        dateTextField.inputView = datePicker
-        reminderTextView.becomeFirstResponder()
+        
+        goalDueDate = UIDatePicker()
+        goalDueDate.addTarget(self, action: #selector(NewGoal.addDate), forControlEvents: UIControlEvents.ValueChanged)
+        goalDueDate.datePickerMode = UIDatePickerMode.DateAndTime
+        dateTextField.inputView = goalDueDate
+        goalDescriptionTextView.becomeFirstResponder()
     }
     
     @IBAction func dismiss(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func saveNewReminder(sender: AnyObject) {
-        let reminder = EKReminder(eventStore: self.eventStore)
-        reminder.title = reminderTextView.text
+    // SAVE NEW GOAL
+    
+    // to-do : sanitize for all fields
+    @IBAction func saveNewGoal(sender: AnyObject) {
+        print("here1")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let dueDateComponents = appDelegate.dateComponentFromNSDate(self.datePicker.date)
-        reminder.dueDateComponents = dueDateComponents
-        reminder.calendar = self.eventStore.defaultCalendarForNewReminders()
+        let managedContext = appDelegate.managedObjectContext
+        let entity = NSEntityDescription.entityForName("Goal", inManagedObjectContext: managedContext)
+        let goal = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        goal.setValue(self.goalNameTextField!.text!, forKey: "goal_name")
+        goal.setValue(self.goalDescriptionTextView!.text!, forKey: "goal_description")
+        goal.setValue(self.goalDueDate.date, forKey: "goal_due_date")
         
         do {
             
-            try self.eventStore.saveReminder(reminder, commit: true)
-            dismissViewControllerAnimated(true, completion: nil)
+            try managedContext.save()
+            goals.append(goal)
             
-        } catch {
-            print("Error creating and saving new reminder : \(error)")
+            
+        } catch let error as NSError {
+            
+            print("Could not save \(error), \(error.userInfo)")
+            
         }
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let goalVC = storyBoard.instantiateViewControllerWithIdentifier("GoalVCID") as! GoalsVC
+        
+        self.presentViewController(goalVC, animated: true, completion: nil)
+
+
     }
     
     func addDate() {
-        self.dateTextField.text = self.datePicker.date.description
+        self.dateTextField.text = self.goalDueDate.date.description
     }
     
     override func didReceiveMemoryWarning() {
