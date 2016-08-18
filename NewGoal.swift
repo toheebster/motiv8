@@ -37,7 +37,9 @@ class NewGoal: UIViewController {
     }
     
     @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController!.popViewControllerAnimated(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+
     }
     
     // SAVE NEW GOAL

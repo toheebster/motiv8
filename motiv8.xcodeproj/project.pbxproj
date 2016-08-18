@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3E363F051CE4DFAE005D2D26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E363F041CE4DFAE005D2D26 /* AppDelegate.swift */; };
-		3E363F071CE4DFAE005D2D26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E363F061CE4DFAE005D2D26 /* ViewController.swift */; };
+		3E363F071CE4DFAE005D2D26 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E363F061CE4DFAE005D2D26 /* Consent.swift */; };
 		3E363F0A1CE4DFAE005D2D26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E363F081CE4DFAE005D2D26 /* Main.storyboard */; };
 		3E363F0C1CE4DFAF005D2D26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E363F0B1CE4DFAF005D2D26 /* Assets.xcassets */; };
 		3E363F0F1CE4DFAF005D2D26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E363F0D1CE4DFAF005D2D26 /* LaunchScreen.storyboard */; };
 		3E363F1A1CE4DFAF005D2D26 /* motiv8Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E363F191CE4DFAF005D2D26 /* motiv8Tests.swift */; };
 		3E363F251CE4DFAF005D2D26 /* motiv8UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E363F241CE4DFAF005D2D26 /* motiv8UITests.swift */; };
+		3E4BD87C1D652FB6003A82A7 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4BD87B1D652FB6003A82A7 /* Survey.swift */; };
 		3E65C25B1D273F170045A019 /* GoalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E65C25A1D273F170045A019 /* GoalsVC.swift */; };
 		3E7566981CE4F03F00A64DEF /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7566971CE4F03F00A64DEF /* ConsentDocument.swift */; };
 		3E75669A1CE4F9EF00A64DEF /* ConsentTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7566991CE4F9EF00A64DEF /* ConsentTask.swift */; };
@@ -82,7 +83,7 @@
 /* Begin PBXFileReference section */
 		3E363F011CE4DFAE005D2D26 /* motiv8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = motiv8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E363F041CE4DFAE005D2D26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3E363F061CE4DFAE005D2D26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3E363F061CE4DFAE005D2D26 /* Consent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
 		3E363F091CE4DFAE005D2D26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3E363F0B1CE4DFAF005D2D26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E363F0E1CE4DFAF005D2D26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 		3E363F201CE4DFAF005D2D26 /* motiv8UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = motiv8UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E363F241CE4DFAF005D2D26 /* motiv8UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = motiv8UITests.swift; sourceTree = "<group>"; };
 		3E363F261CE4DFAF005D2D26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E4BD87B1D652FB6003A82A7 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		3E65C25A1D273F170045A019 /* GoalsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsVC.swift; sourceTree = "<group>"; };
 		3E7566971CE4F03F00A64DEF /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		3E7566991CE4F9EF00A64DEF /* ConsentTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentTask.swift; sourceTree = "<group>"; };
@@ -163,7 +165,8 @@
 			children = (
 				3E90FD901D220D4800794E82 /* motiv8.entitlements */,
 				3E363F041CE4DFAE005D2D26 /* AppDelegate.swift */,
-				3E363F061CE4DFAE005D2D26 /* ViewController.swift */,
+				3E363F061CE4DFAE005D2D26 /* Consent.swift */,
+				3E4BD87B1D652FB6003A82A7 /* Survey.swift */,
 				3E363F081CE4DFAE005D2D26 /* Main.storyboard */,
 				3E363F0B1CE4DFAF005D2D26 /* Assets.xcassets */,
 				3E363F0D1CE4DFAF005D2D26 /* LaunchScreen.storyboard */,
@@ -367,13 +370,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E363F071CE4DFAE005D2D26 /* ViewController.swift in Sources */,
+				3E363F071CE4DFAE005D2D26 /* Consent.swift in Sources */,
 				3E75669A1CE4F9EF00A64DEF /* ConsentTask.swift in Sources */,
 				3EE2D8821CFCC722004C466B /* SurveyTask.swift in Sources */,
 				3ECD7E8A1D3570F000EE9C64 /* NewGoal.swift in Sources */,
 				3E65C25B1D273F170045A019 /* GoalsVC.swift in Sources */,
 				3ECD7E8C1D35710D00EE9C64 /* GoalDetails.swift in Sources */,
 				3ECD7E961D36D54C00EE9C64 /* motiv8model.xcdatamodeld in Sources */,
+				3E4BD87C1D652FB6003A82A7 /* Survey.swift in Sources */,
 				3E7566981CE4F03F00A64DEF /* ConsentDocument.swift in Sources */,
 				3E363F051CE4DFAE005D2D26 /* AppDelegate.swift in Sources */,
 			);

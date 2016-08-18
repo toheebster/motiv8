@@ -45,8 +45,11 @@ class GoalsDetails: UIViewController {
     }
     
     @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        print("hit cancel")
+        self.navigationController!.popViewControllerAnimated(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
 
+        
     }
     
     

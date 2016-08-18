@@ -9,7 +9,8 @@
 import ResearchKit
 
 public var ConsentTask: ORKOrderedTask {
-
+    let consentCheck = NSUserDefaults.standardUserDefaults()
+    consentCheck.setBool(false, forKey: "completedConsent")
     var steps = [ORKStep]()
     
     //VisualConsentStep
@@ -26,6 +27,5 @@ public var ConsentTask: ORKOrderedTask {
     reviewConsentStep.reasonForConsent = "Consent to join study"
     
     steps += [reviewConsentStep]
-
     return ORKOrderedTask(identifier: "ConsentTask", steps: steps)
 }

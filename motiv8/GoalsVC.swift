@@ -93,9 +93,25 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     //fix delete
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        print("delete true")
+        return true
+    }
+    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if(editingStyle == .Delete) {
+            print(".Delete")
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            
+            let goalToDelete = goals[indexPath.row]
+            managedContext.deleteObject(goalToDelete)
+            
+            self.goals.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        }
 
-        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
 
     }
     

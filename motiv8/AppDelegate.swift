@@ -17,7 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let defaults = NSUserDefaults.standardUserDefaults()
+        //if user completed both survey & consent
+        if((defaults.boolForKey("completedSurvey") == true) && (defaults.boolForKey("completedConsent") == true)){
+            let nav = self.window?.rootViewController as! UINavigationController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            nav.pushViewController(storyboard.instantiateViewControllerWithIdentifier("GoalVCID"), animated: false)
+            print(defaults.boolForKey("completedConsent"))
+            print(defaults.boolForKey("completedSurvey"))
+            print("completed consent and survey")
+        } else if (defaults.boolForKey("completedSurvey") == true) && (defaults.boolForKey("completedConsent") == false){
+            let navigation = self.window?.rootViewController as! UINavigationController
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            navigation.pushViewController(sb.instantiateViewControllerWithIdentifier("SurveyID"), animated: false)
+        } else {
+            print("none")
+            let navs = self.window?.rootViewController as! UINavigationController
+            let strybrd = UIStoryboard(name: "Main", bundle: nil)
+            navs.pushViewController(strybrd.instantiateViewControllerWithIdentifier("ConsentID"), animated: false)
+        }
+        
         return true
+    }
+    
+    func applicationDidFinishLaunching(application: UIApplication) {
     }
 
     func applicationWillResignActive(application: UIApplication) {
