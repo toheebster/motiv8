@@ -18,15 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let defaults = NSUserDefaults.standardUserDefaults()
+        print("consent: ")
+        print(defaults.boolForKey("completedConsent"))
+        print("survey: ")
+        print(defaults.boolForKey("completedSurvey"))
+        
         //if user completed both survey & consent
         if((defaults.boolForKey("completedSurvey") == true) && (defaults.boolForKey("completedConsent") == true)){
             let nav = self.window?.rootViewController as! UINavigationController
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             nav.pushViewController(storyboard.instantiateViewControllerWithIdentifier("GoalVCID"), animated: false)
-            print(defaults.boolForKey("completedConsent"))
-            print(defaults.boolForKey("completedSurvey"))
-            print("completed consent and survey")
-        } else if (defaults.boolForKey("completedSurvey") == true) && (defaults.boolForKey("completedConsent") == false){
+            print("Consent and survey alreadyd completed")
+        } else if (defaults.boolForKey("completedConsent") == true) && (defaults.boolForKey("completedSurvey") == false){
             let navigation = self.window?.rootViewController as! UINavigationController
             let sb = UIStoryboard(name: "Main", bundle: nil)
             navigation.pushViewController(sb.instantiateViewControllerWithIdentifier("SurveyID"), animated: false)

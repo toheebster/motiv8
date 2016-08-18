@@ -10,8 +10,6 @@ import Foundation
 import ResearchKit
 
 public var SurveyTask: ORKOrderedTask {
-    let surveyCheck = NSUserDefaults.standardUserDefaults()
-    surveyCheck.setBool(false, forKey: "completedSurvey")
     var steps = [ORKStep]()
     
     // instruction step
@@ -109,7 +107,6 @@ public var SurveyTask: ORKOrderedTask {
     summaryStep.text = "That was easy!"
     steps += [summaryStep]
     
-    print(nameStep)
     return ORKOrderedTask(identifier: "SurveyTask", steps: steps)
     
 }

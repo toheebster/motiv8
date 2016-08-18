@@ -20,13 +20,17 @@ class Survey: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.navigationController?.navigationBarHidden = true
-        // Do any additional setup after loading the view, typically from a nib.
+        self.checkSurvey()
+        self.navigationController?.navigationBarHidden = true
         self.survey()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
     }
     
     func survey() {
@@ -34,6 +38,12 @@ class Survey: UIViewController {
         let taskVC = ORKTaskViewController(task: SurveyTask, taskRunUUID: nil)
         taskVC.delegate = self
         presentViewController(taskVC, animated: true, completion: nil)
+    }
+    
+    func checkSurvey() {
+        if check.boolForKey("completedSurvey") != true {
+            check.setBool(false, forKey: "completedSurvey")
+        }
     }
     
 }
@@ -46,10 +56,31 @@ extension Survey : ORKTaskViewControllerDelegate {
         
         switch reason {
         case ORKTaskViewControllerFinishReason.Completed:
-            check.setBool(true, forKey: "completedConsent")
-            print("completed consent")
+            
+            check.setBool(true, forKey: "completedSurvey")
+            print("completed survey")
             //send to survey vc
             self.performSegueWithIdentifier("ShowGoalsVC", sender:self)
+        
+        case ORKTaskViewControllerFinishReason.Discarded:
+            
+            print("discarded survey")
+            let alert = UIAlertController(title: "Alert", message: "You must complete survey before continuing", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
+            
+                //start over
+                switch action.style {
+                case .Default:
+                    self.survey()
+                default:
+                    self.survey()
+                }
+                
+            }))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+
+            
         default:
             print("breaking from survey")
             break

@@ -123,7 +123,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowGoalsDetails" {
             
-            print("at gaol detail vc")
+            print("at goal detail vc")
             
             let goalDetailsVC = segue.destinationViewController as! GoalsDetails
             goalDetailsVC.goalName = self.goalName

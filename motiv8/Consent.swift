@@ -12,20 +12,21 @@ import ResearchKit
 class Consent: UIViewController {
 
     let check = NSUserDefaults.standardUserDefaults()
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBarHidden = true
-        // Do any additional setup after loading the view, typically from a nib.
+        self.checkConsent()
+        self.navigationController?.navigationBarHidden = true
         self.consent()
     }
-//    override func viewWillAppear(animated: Bool) {
-//        self.navigationController?.navigationBarHidden = true
-//    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = true
+    }
     
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
@@ -36,6 +37,12 @@ class Consent: UIViewController {
         let taskViewController = ORKTaskViewController(task: ConsentTask, taskRunUUID: nil)
         taskViewController.delegate = self
         presentViewController(taskViewController, animated: true, completion: nil)
+    }
+    
+    func checkConsent() {
+        if check.boolForKey("completedConsent") != true {
+            check.setBool(false, forKey: "completedConsent")
+        }
     }
 
 }
@@ -48,10 +55,18 @@ extension Consent : ORKTaskViewControllerDelegate {
         
         switch reason {
         case ORKTaskViewControllerFinishReason.Completed:
+            
             check.setBool(true, forKey: "completedConsent")
             print("completed consent")
             //send to survey vc
             self.performSegueWithIdentifier("ShowSurvey", sender:self)
+        
+        case ORKTaskViewControllerFinishReason.Discarded:
+            
+            print("discarded consent")
+            //start over
+            self.consent()
+            
         default:
             print("breaking from consent")
             break
