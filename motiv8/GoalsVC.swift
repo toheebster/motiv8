@@ -28,6 +28,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         //fetch goals
         
         self.navigationController?.navigationBarHidden = false
+
         super.viewWillAppear(animated)
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -107,7 +108,6 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             let managedContext = appDelegate.managedObjectContext
             
             let goalToDelete = goals[indexPath.row]
-            print(goalToDelete)
             managedContext.deleteObject(goalToDelete)
             self.goals.removeAtIndex(indexPath.row)
             
@@ -145,7 +145,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             let indexPath = tableView.indexPathForSelectedRow
             let goal = goals[indexPath!.row]
-            goalDetailsVC.passGoal(goal)
+            goalDetailsVC.passGoal(goal, location: indexPath!.row)
     
         } else {
             

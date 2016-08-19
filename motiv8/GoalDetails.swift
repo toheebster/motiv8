@@ -13,7 +13,10 @@ import CoreData
 
 class GoalsDetails: UIViewController {
     
-    var goal = NSManagedObject()
+    var goal: NSManagedObject?
+    var goalToUpdate: NSManagedObject?
+    
+    var location = Int()
     var goals = [NSManagedObject]()
     var goalName = String()
     var goalDescription = String()
@@ -27,15 +30,9 @@ class GoalsDetails: UIViewController {
     // handle if a field is deleted
     @IBAction func saveGoal(sender: AnyObject) {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        
-        let entity = NSEntityDescription.entityForName("Goal", inManagedObjectContext: managedContext)
-        let goal = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        
-        goal.setValue(self.goalNameLabel!.text!, forKey: "goal_name")
-        goal.setValue(self.descriptionLabel!.text!, forKey: "goal_description")
-        goal.setValue(self.goalDueDate.date, forKey: "goal_due_date")
+        goalToUpdate!.setValue(self.goalNameLabel!.text!, forKey: "goal_name")
+        goalToUpdate!.setValue(self.descriptionLabel!.text!, forKey: "goal_description")
+        goalToUpdate!.setValue(self.goalDueDate.date, forKey: "goal_due_date")
         
         let name = self.goalNameLabel!.text!
         let desc = self.descriptionLabel!.text!
@@ -44,12 +41,11 @@ class GoalsDetails: UIViewController {
         //change to name != "" && desc != "" && date != "" after testing
         if desc != "" && date != "" {
             do {
-                try managedContext.save()
-                goals.append(goal)
+                try goalToUpdate!.managedObjectContext?.save()
                 self.navigationController!.popViewControllerAnimated(true)
                 self.navigationController?.setToolbarHidden(false, animated: false)
             } catch let error as NSError {
-                print("Could not save \(error), \(error.userInfo)")
+                print("Could not update \(error), \(error.userInfo)")
                 //popup
             }
             
@@ -65,6 +61,24 @@ class GoalsDetails: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "Goal")
+        
+        do {
+            
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            goalToUpdate = results[location] as? NSManagedObject
+            
+        } catch let error as NSError {
+            
+            print("Could not fetch \(error), \(error.userInfo)")
+            
+        }
+
     }
     
     func addDate() {
@@ -93,11 +107,12 @@ class GoalsDetails: UIViewController {
         self.goalDateLabel!.text! = formatter.stringFromDate(self.goalDueDate.date)
     }
     
-    func passGoal(goal: NSManagedObject) {
+    func passGoal(goal: NSManagedObject, location: Int) {
         goalName = (goal.valueForKey("goal_name") as? String)!
         goalDescription = (goal.valueForKey("goal_description") as? String)!
         goalDate = (goal.valueForKey("goal_due_date") as? NSDate)!
         self.goal = goal
+        self.location = location
     }
     
     
