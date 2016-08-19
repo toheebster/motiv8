@@ -22,7 +22,6 @@ class NewGoal: UIViewController {
     
     
     override func viewDidLoad() {
-        print("did load")
         super.viewDidLoad()
 
         self.goalNameTextField.placeholder = "What is your goal?"
@@ -46,7 +45,6 @@ class NewGoal: UIViewController {
     
     // to-do : sanitize for all fields
     @IBAction func saveNewGoal(sender: AnyObject) {
-        print("here1")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let entity = NSEntityDescription.entityForName("Goal", inManagedObjectContext: managedContext)
@@ -61,17 +59,21 @@ class NewGoal: UIViewController {
             try managedContext.save()
             goals.append(goal)
             
-            
         } catch let error as NSError {
             
             print("Could not save \(error), \(error.userInfo)")
             
         }
-        
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let goalVC = storyBoard.instantiateViewControllerWithIdentifier("GoalVCID") as! GoalsVC
-        
-        self.presentViewController(goalVC, animated: true, completion: nil)
+        self.navigationController!.popViewControllerAnimated(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+//        
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let goalVC = storyBoard.instantiateViewControllerWithIdentifier("GoalVCID") as! GoalsVC
+//        self.presentViewController(goalVC, animated: true, completion: nil)
+
+//        let nav = self.window?.rootViewController as! UINavigationController
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        nav.pushViewController(storyboard.instantiateViewControllerWithIdentifier("GoalVCID"), animated: false)
 
 
     }

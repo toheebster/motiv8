@@ -67,7 +67,6 @@ extension Survey : ORKTaskViewControllerDelegate {
             print("discarded survey")
             let alert = UIAlertController(title: "Alert", message: "You must complete survey before continuing", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
-            
                 //start over
                 switch action.style {
                 case .Default:
@@ -75,9 +74,7 @@ extension Survey : ORKTaskViewControllerDelegate {
                 default:
                     self.survey()
                 }
-                
             }))
-            
             self.presentViewController(alert, animated: true, completion: nil)
 
             

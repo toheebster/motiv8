@@ -16,7 +16,8 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var goals = [NSManagedObject]()
     var goalName = String()
     var goalDescription = String()
-    var goalDueDate: UIDatePicker!
+    var goalDueDate = String()
+    var date = NSDate()
     
     
 //    @IBOutlet var tableView: UITableView!
@@ -25,6 +26,8 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         //fetch goals
+        
+        self.navigationController?.navigationBarHidden = false
         super.viewWillAppear(animated)
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -43,6 +46,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             print("Could not fetch \(error), \(error.userInfo)")
             
         }
+        tableView.reloadData()
         
     }
     
@@ -53,6 +57,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
+    
     
     @IBAction func editTable(sender: AnyObject) {
         tableView.editing = !tableView.editing
@@ -75,68 +80,77 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("GoalCell")
-        
         let goal = goals[indexPath.row]
         
+        let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("GoalCell")
         cell!.textLabel!.text = goal.valueForKey("goal_name") as? String
         
         let formatter:NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "EEEE, MMMM, d, yyyy 'at' hh:mm a"
         
-        if let dueDate = goal.valueForKey("goal_due_date")?.dueDateComponents?!.date{
-            cell.detailTextLabel?.text = formatter.stringFromDate(dueDate)
-        } else {
-            cell.detailTextLabel?.text = "N/A"
-        }
+        self.date = goal.valueForKey("goal_due_date") as! NSDate
+        self.goalDueDate = formatter.stringFromDate(date)
+        cell.detailTextLabel?.text = "Due on: " + self.goalDueDate
+
         return cell
     }
     
-    //fix delete
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        print("delete true")
         return true
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if(editingStyle == .Delete) {
-            print(".Delete")
+            
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
             
             let goalToDelete = goals[indexPath.row]
+            print(goalToDelete)
             managedContext.deleteObject(goalToDelete)
-            
             self.goals.removeAtIndex(indexPath.row)
+            
+            do {
+                try managedContext.save()
+            } catch _ {
+                
+            }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
 
 
     }
     
-    //might have to just make this a function
     func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ShowGoalsDetails", sender: self)
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        let formatter:NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "EEEE, MMMM, d, yyyy 'at' hh:mm a"
+        
+        let goal = goals[indexPath.row]
+        self.goalName = goal.valueForKey("goal_name") as! String
+        self.goalDescription = goal.valueForKey("goal_name") as! String
+        self.date = goal.valueForKey("goal_due_date") as! NSDate
+        self.goalDueDate = formatter.stringFromDate(date)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowGoalsDetails" {
-            
-            print("at goal detail vc")
-            
+           
             let goalDetailsVC = segue.destinationViewController as! GoalsDetails
-            goalDetailsVC.goalName = self.goalName
-            goalDetailsVC.goalDescription = self.goalDescription
-            goalDetailsVC.goalDueDate = self.goalDueDate
+            
+            let indexPath = tableView.indexPathForSelectedRow
+            let goal = goals[indexPath!.row]
+            goalDetailsVC.passGoal(goal)
     
         } else {
             
-            print("at new goal vc")
-            
             let newGoalVC = segue.destinationViewController as! NewGoal
             newGoalVC.goals = goals
-            
         }
     }
 }

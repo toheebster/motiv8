@@ -13,9 +13,11 @@ import CoreData
 
 class GoalsDetails: UIViewController {
     
+    var goal = NSManagedObject()
     var goals = [NSManagedObject]()
     var goalName = String()
     var goalDescription = String()
+    var goalDate = NSDate()
     var goalDueDate: UIDatePicker!
     
     @IBOutlet var goalDateLabel: UITextField!
@@ -33,50 +35,69 @@ class GoalsDetails: UIViewController {
         
         goal.setValue(self.goalNameLabel!.text!, forKey: "goal_name")
         goal.setValue(self.descriptionLabel!.text!, forKey: "goal_description")
-        goal.setValue(self.goalDateLabel!.text!, forKey: "goal_due_date")
+        goal.setValue(self.goalDueDate.date, forKey: "goal_due_date")
         
-        do {
-            try managedContext.save()
-            goals.append(goal)
-        } catch let error as NSError {
-            print("Could not save \(error), \(error.userInfo)")
+        let name = self.goalNameLabel!.text!
+        let desc = self.descriptionLabel!.text!
+        let date = self.goalDateLabel!.text!
+        
+        //change to name != "" && desc != "" && date != "" after testing
+        if desc != "" && date != "" {
+            do {
+                try managedContext.save()
+                goals.append(goal)
+                self.navigationController!.popViewControllerAnimated(true)
+                self.navigationController?.setToolbarHidden(false, animated: false)
+            } catch let error as NSError {
+                print("Could not save \(error), \(error.userInfo)")
+                //popup
+            }
+            
+        } else {
+            //popup
         }
-       
     }
     
     @IBAction func dismiss(sender: AnyObject) {
-        print("hit cancel")
         self.navigationController!.popViewControllerAnimated(true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-
-        
     }
     
-    
-    
-    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-
-        self.descriptionLabel.text = self.goalDescription
-//        self.goalDateLabel.text = self.goalDueDate.date.description
-        self.goalNameLabel.text = self.goalName
-        
-        
-        goalDueDate = UIDatePicker()
-        goalDueDate.addTarget(self, action: #selector(GoalsDetails.addDate), forControlEvents: UIControlEvents.ValueChanged)
-        goalDueDate.datePickerMode = UIDatePickerMode.DateAndTime
-        goalDateLabel.inputView = goalDueDate
-        descriptionLabel.becomeFirstResponder()
     }
     
     func addDate() {
         self.goalDateLabel.text = self.goalDueDate.date.description
     }
-    
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        let formatter:NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "EEEE, MMMM, d, yyyy 'at' hh:mm a"
+        
+        self.goalNameLabel!.text! = self.goalName
+        self.descriptionLabel!.text! = self.goalDescription
+        
+        goalDueDate = UIDatePicker()
+        goalDueDate.date = self.goalDate
+        goalDueDate.addTarget(self, action: #selector(GoalsDetails.addDate), forControlEvents: UIControlEvents.ValueChanged)
+        goalDueDate.datePickerMode = UIDatePickerMode.DateAndTime
+        goalDateLabel.inputView = goalDueDate
+        descriptionLabel.becomeFirstResponder()
+        
+        self.goalDateLabel!.text! = formatter.stringFromDate(self.goalDueDate.date)
+    }
+    
+    func passGoal(goal: NSManagedObject) {
+        goalName = (goal.valueForKey("goal_name") as? String)!
+        goalDescription = (goal.valueForKey("goal_description") as? String)!
+        goalDate = (goal.valueForKey("goal_due_date") as? NSDate)!
+        self.goal = goal
     }
     
     
