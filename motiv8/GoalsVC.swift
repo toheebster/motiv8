@@ -87,7 +87,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell!.textLabel!.text = goal.valueForKey("goal_name") as? String
         
         let formatter:NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "EEEE, MMMM, d, yyyy 'at' hh:mm a"
+        formatter.dateFormat = "EEEE, MMMM d"
         
         self.date = goal.valueForKey("goal_due_date") as! NSDate
         self.goalDueDate = formatter.stringFromDate(date)

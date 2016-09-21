@@ -41,6 +41,19 @@ class NewGoal: UIViewController {
 
     }
     
+    func createNotification(){
+        //do a managed context check to see what number this user has and determine whether or not to set a notification
+        var notification = UILocalNotification()
+        notification.alertBody = "Did you exercise today?"
+        notification.alertAction = "respond"
+        notification.fireDate = self.goalDueDate.date //change to reminder date
+        notification.soundName = UILocalNotificationDefaultSoundName
+        //assign unique identifiers to notification
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        print("notification created")
+    }
+    
     // SAVE NEW GOAL
     
     // to-do : sanitize for all fields
@@ -74,7 +87,7 @@ class NewGoal: UIViewController {
 //        let nav = self.window?.rootViewController as! UINavigationController
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        nav.pushViewController(storyboard.instantiateViewControllerWithIdentifier("GoalVCID"), animated: false)
-
+        self.createNotification()
 
     }
     
