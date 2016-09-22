@@ -11,6 +11,11 @@ import EventKit
 import UIKit
 import CoreData
 
+
+// group 1 = <3.3
+// group 2 = >3.3 & <6.6
+// group 3 = >6.6 && < 1
+
 class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var goals = [NSManagedObject]()

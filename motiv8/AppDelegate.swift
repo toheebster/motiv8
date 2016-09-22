@@ -14,18 +14,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    func setUserGroup() {
+        //change number here for testing
+        let number = drand48() //generaters a number between 0 & 1
+        NSUserDefaults.standardUserDefaults().setDouble(number, forKey: "number") //set number for the group.
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
         let defaults = NSUserDefaults.standardUserDefaults()
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
         
         //if user completed both survey & consent
         if((defaults.boolForKey("completedSurvey") == true) && (defaults.boolForKey("completedConsent") == true)){
             let nav = self.window?.rootViewController as! UINavigationController
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             nav.pushViewController(storyboard.instantiateViewControllerWithIdentifier("GoalVCID"), animated: false)
-            print("Consent and survey already completed")
+            print("Consent and survey completed")
         } else if (defaults.boolForKey("completedConsent") == true) && (defaults.boolForKey("completedSurvey") == false){
             print("Survey not completed")
             let navigation = self.window?.rootViewController as! UINavigationController
@@ -36,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let navs = self.window?.rootViewController as! UINavigationController
             let strybrd = UIStoryboard(name: "Main", bundle: nil)
             navs.pushViewController(strybrd.instantiateViewControllerWithIdentifier("ConsentID"), animated: false)
+            //first time opening up this app, so set the user group
+            self.setUserGroup()
         }
         
         return true

@@ -11,6 +11,10 @@ import UIKit
 import EventKit
 import CoreData
 
+// group 1 = <3.3
+// group 2 = >3.3 & <6.6
+// group 3 = >6.6 && < 1
+
 class GoalsDetails: UIViewController {
     
     var goal: NSManagedObject?

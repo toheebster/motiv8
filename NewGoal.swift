@@ -10,7 +10,13 @@ import UIKit
 import EventKit
 import CoreData
 
+// group 1 = < .4 - notification + feedback
+// group 2 = > .4 & < .6 - notification no feedback
+// group 3 = >.7 && < 1 - no notification no feedback
+
 class NewGoal: UIViewController {
+    let defaults = NSUserDefaults.standardUserDefaults()
+
     var goals = [NSManagedObject]()
     var goalName = String()
     var goalDescription = String()
@@ -41,10 +47,10 @@ class NewGoal: UIViewController {
 
     }
     
-    func createNotification(){
-        //do a managed context check to see what number this user has and determine whether or not to set a notification
+    func createFeedbackNotification(){
         var notification = UILocalNotification()
         notification.alertBody = "Did you exercise today?"
+        notification.alertTitle = "Motiv8"
         notification.alertAction = "respond"
         notification.fireDate = self.goalDueDate.date //change to reminder date
         notification.soundName = UILocalNotificationDefaultSoundName
@@ -53,6 +59,21 @@ class NewGoal: UIViewController {
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
         print("notification created")
     }
+    
+    func createGenericNotification(){
+        var notification = UILocalNotification()
+        notification.alertBody = "Don't forget to exercise today!"
+        notification.alertAction = "open"
+        notification.alertTitle = "Motiv8"
+        notification.fireDate = self.goalDueDate.date //change to reminder date
+        notification.soundName = UILocalNotificationDefaultSoundName
+        //assign unique identifiers to notification
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        print("notification created")
+    }
+    
+    
     
     // SAVE NEW GOAL
     
@@ -79,15 +100,13 @@ class NewGoal: UIViewController {
         }
         self.navigationController!.popViewControllerAnimated(true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-//        
-//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-//        let goalVC = storyBoard.instantiateViewControllerWithIdentifier("GoalVCID") as! GoalsVC
-//        self.presentViewController(goalVC, animated: true, completion: nil)
-
-//        let nav = self.window?.rootViewController as! UINavigationController
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        nav.pushViewController(storyboard.instantiateViewControllerWithIdentifier("GoalVCID"), animated: false)
-        self.createNotification()
+        
+        // if either in group 1 or 2
+        if(defaults.doubleForKey("number") < Double(0.6)){
+            self.createFeedbackNotification()
+        } else {
+            self.createGenericNotification()
+        }
 
     }
     
