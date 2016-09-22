@@ -62,6 +62,18 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        for goal in goals {
+            let reminderDate = goal.valueForKey("goal_due_date")!
+            switch reminderDate.compare(NSDate()) {
+            case .OrderedSame: break //remove
+                //fire a popup
+            case .OrderedAscending: break
+                //fire a popup
+            default: break
+                
+            }
+        }
     }
     
     
