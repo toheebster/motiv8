@@ -279,6 +279,7 @@
 					3E363F001CE4DFAE005D2D26 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = SPHT847YFC;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
 								enabled = 1;
@@ -287,10 +288,12 @@
 					};
 					3E363F141CE4DFAF005D2D26 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 3E363F001CE4DFAE005D2D26;
 					};
 					3E363F1F1CE4DFAF005D2D26 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 3E363F001CE4DFAE005D2D26;
 					};
 				};
@@ -535,6 +538,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.toheeb.motiv8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -551,6 +555,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.toheeb.motiv8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -562,6 +567,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.toheeb.motiv8Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/motiv8.app/motiv8";
 			};
 			name = Debug;
@@ -574,6 +580,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.toheeb.motiv8Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/motiv8.app/motiv8";
 			};
 			name = Release;
@@ -585,6 +592,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.toheeb.motiv8UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = motiv8;
 			};
 			name = Debug;
@@ -596,6 +604,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.toheeb.motiv8UITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = motiv8;
 			};
 			name = Release;

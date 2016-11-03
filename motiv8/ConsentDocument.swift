@@ -16,14 +16,14 @@ public var ConsentDocument: ORKConsentDocument {
     //Consent sections
         //maybe add .Custom .. will have no default content, can customize as needed
     let consentSectionTypes: [ORKConsentSectionType] = [
-        .Overview,
-        .DataGathering,
-        .Privacy,
-        .DataUse,
-        .TimeCommitment,
-        .StudySurvey,
-        .StudyTasks,
-        .Withdrawing
+        .overview,
+        .dataGathering,
+        .privacy,
+        .dataUse,
+        .timeCommitment,
+        .studySurvey,
+        .studyTasks,
+        .withdrawing
     ]
     
     let consentSections: [ORKConsentSection] = consentSectionTypes.map { contentSectionType in

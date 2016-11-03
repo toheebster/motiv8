@@ -24,7 +24,7 @@ class GoalsDetails: UIViewController {
     var goals = [NSManagedObject]()
     var goalName = String()
     var goalDescription = String()
-    var goalDate = NSDate()
+    var goalDate = Date()
     var goalDueDate: UIDatePicker!
     
     @IBOutlet var goalDateLabel: UITextField!
@@ -32,7 +32,7 @@ class GoalsDetails: UIViewController {
     @IBOutlet var goalNameLabel: UILabel!
     
     // handle if a field is deleted
-    @IBAction func saveGoal(sender: AnyObject) {
+    @IBAction func saveGoal(_ sender: AnyObject) {
         
         goalToUpdate!.setValue(self.goalNameLabel!.text!, forKey: "goal_name")
         goalToUpdate!.setValue(self.descriptionLabel!.text!, forKey: "goal_description")
@@ -46,7 +46,7 @@ class GoalsDetails: UIViewController {
         if desc != "" && date != "" {
             do {
                 try goalToUpdate!.managedObjectContext?.save()
-                self.navigationController!.popViewControllerAnimated(true)
+                self.navigationController!.popViewController(animated: true)
                 self.navigationController?.setToolbarHidden(false, animated: false)
             } catch let error as NSError {
                 print("Could not update \(error), \(error.userInfo)")
@@ -58,23 +58,23 @@ class GoalsDetails: UIViewController {
         }
     }
     
-    @IBAction func dismiss(sender: AnyObject) {
-        self.navigationController!.popViewControllerAnimated(true)
+    @IBAction func dismiss(_ sender: AnyObject) {
+        self.navigationController!.popViewController(animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Goal")
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Goal")
         
         do {
             
-            let results = try managedContext.executeFetchRequest(fetchRequest)
+            let results = try managedContext.fetch(fetchRequest)
             goalToUpdate = results[location] as? NSManagedObject
             
         } catch let error as NSError {
@@ -93,9 +93,9 @@ class GoalsDetails: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        let formatter:NSDateFormatter = NSDateFormatter()
+        let formatter:DateFormatter = DateFormatter()
         formatter.dateFormat = "EEEE, MMMM, d, yyyy 'at' hh:mm a"
         
         self.goalNameLabel!.text! = self.goalName
@@ -103,18 +103,18 @@ class GoalsDetails: UIViewController {
         
         goalDueDate = UIDatePicker()
         goalDueDate.date = self.goalDate
-        goalDueDate.addTarget(self, action: #selector(GoalsDetails.addDate), forControlEvents: UIControlEvents.ValueChanged)
-        goalDueDate.datePickerMode = UIDatePickerMode.DateAndTime
+        goalDueDate.addTarget(self, action: #selector(GoalsDetails.addDate), for: UIControlEvents.valueChanged)
+        goalDueDate.datePickerMode = UIDatePickerMode.dateAndTime
         goalDateLabel.inputView = goalDueDate
         descriptionLabel.becomeFirstResponder()
         
-        self.goalDateLabel!.text! = formatter.stringFromDate(self.goalDueDate.date)
+        self.goalDateLabel!.text! = formatter.string(from: self.goalDueDate.date)
     }
     
-    func passGoal(goal: NSManagedObject, location: Int) {
-        goalName = (goal.valueForKey("goal_name") as? String)!
-        goalDescription = (goal.valueForKey("goal_description") as? String)!
-        goalDate = (goal.valueForKey("goal_due_date") as? NSDate)!
+    func passGoal(_ goal: NSManagedObject, location: Int) {
+        goalName = (goal.value(forKey: "goal_name") as? String)!
+        goalDescription = (goal.value(forKey: "goal_description") as? String)!
+        goalDate = (goal.value(forKey: "goal_due_date") as? Date)!
         self.goal = goal
         self.location = location
     }
