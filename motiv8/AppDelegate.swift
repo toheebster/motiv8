@@ -14,10 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // group 1 = <3.3 -- precise goal and feedback
+    // group 2 = >3.3 & <6.6 -- precise goal no feedback
+    // group 3 = >6.6 && < 1  -- vague goal no feedback
+    
     func setUserGroup() {
+        let standard = UserDefaults.standard
         //change number here for testing
         let number = drand48() //generaters a number between 0 & 1
-        UserDefaults.standard.set(number, forKey: "number") //set number for the group.
+        // determine which group it is
+        standard.set(number, forKey: "number")
+        
+        if number < 0.3 {
+            standard.set(1, forKey: "group")
+        } else if number >= 0.3 && number < 0.6 {
+            standard.set(2, forKey: "group")
+        } else {
+            standard.set(3, forKey: "group")
+        }
+        
+        print("user number is \(number)")
+        print("user group is \(standard.integer(forKey: "group"))")
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
