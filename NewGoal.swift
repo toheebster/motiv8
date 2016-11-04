@@ -15,7 +15,7 @@ import CoreData
 // group 3 = >.7 && < 1 - no notification no feedback
 
 class NewGoal: UIViewController {
-    let defaults = UserDefaults.standard
+    let standards = UserDefaults.standard
 
     var goals = [NSManagedObject]()
     var goalName = String()
@@ -47,8 +47,7 @@ class NewGoal: UIViewController {
 
     }
     
-    //pass in goal and use goal id as notifc.userinfo hahahhaha
-    func createFeedbackNotification(){
+    func createFeedbackNotification(goalId: String){
         let notification = UILocalNotification()
         notification.alertBody = "Did you meet your daily exercise goal today?"
         notification.alertTitle = "Motiv8"
@@ -56,13 +55,14 @@ class NewGoal: UIViewController {
         notification.fireDate = self.goalDueDate.date //change to reminder date
         notification.repeatInterval = NSCalendar.Unit.day
         notification.soundName = UILocalNotificationDefaultSoundName
-        //assign unique identifiers to notification
-        
+        print("goal id is \(goalId)")
+        notification.userInfo = ["id": goalId]
+        print(notification.userInfo?["id"])
         UIApplication.shared.scheduleLocalNotification(notification)
-        print("notification created")
+        print("feedback notification created")
     }
     
-    func createGenericNotification(){
+    func createGenericNotification(goalId: String){
         let notification = UILocalNotification()
         notification.alertBody = "Remember to excercise"
         notification.alertAction = "open"
@@ -70,16 +70,11 @@ class NewGoal: UIViewController {
         notification.fireDate = self.goalDueDate.date //change to reminder date
         notification.soundName = UILocalNotificationDefaultSoundName
         //assign unique identifiers to notification
-        
+        notification.userInfo = ["id": goalId]
         UIApplication.shared.scheduleLocalNotification(notification)
-        print("notification created")
+        print("generic notification created")
     }
     
-    func removeNotification(){
-        
-    }
-    //set badge numbers
-
     
     // SAVE NEW GOAL
     
@@ -95,25 +90,29 @@ class NewGoal: UIViewController {
         goal.setValue(self.goalDueDate.date, forKey: "goal_due_date")
         
         do {
-            
             try managedContext.save()
             goals.append(goal)
             
         } catch let error as NSError {
-            
             print("Could not save \(error), \(error.userInfo)")
-            
         }
         self.navigationController!.popViewController(animated: true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
-        // if either in group 1 or 2
-        if(defaults.integer(forKey: "group") < 3){
-            self.createFeedbackNotification(goal)
+        let goalId = goalIdToURI(goalId: goal.objectID)
+        print(goalId)
+//         if either in group 1 or 2
+        if(standards.integer(forKey: "group") < 3){
+            self.createFeedbackNotification(goalId: goalId)
         } else {
-            self.createGenericNotification(goal)
+            self.createGenericNotification(goalId: goalId)
         }
 
+    }
+    
+    func goalIdToURI(goalId: NSManagedObjectID) -> String {
+        let URI = goalId.uriRepresentation().absoluteString
+        return URI
     }
     
     func addDate() {

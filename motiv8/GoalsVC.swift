@@ -31,7 +31,6 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         //fetch goals
-        
         self.navigationController?.isNavigationBarHidden = false
 
         super.viewWillAppear(animated)
@@ -125,19 +124,40 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             let managedContext = appDelegate.managedObjectContext
             
             let goalToDelete = goals[(indexPath as NSIndexPath).row]
+            
+            //delete the notification associated with this goal
+            deleteGoalNotification(goalId: goalToDelete.objectID)
+            
             managedContext.delete(goalToDelete)
             self.goals.remove(at: (indexPath as NSIndexPath).row)
             
             do {
                 try managedContext.save()
             } catch _ {
-                
             }
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
 
 
     }
+    
+    func deleteGoalNotification(goalId: NSManagedObjectID) {
+        let id = goalIdToURI(goalId: goalId)
+        for notification in UIApplication.shared.scheduledLocalNotifications! as [UILocalNotification] {
+            print(notification)
+            if(notification.userInfo!["id"] as! String == id){
+                UIApplication.shared.cancelLocalNotification(notification)
+                print("notfication deleted for \(id)")
+                break
+            }
+        }
+    }
+    
+    func goalIdToURI(goalId: NSManagedObjectID) -> String {
+        let URI = goalId.uriRepresentation().absoluteString
+        return URI
+    }
+
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         self.performSegue(withIdentifier: "ShowGoalsDetails", sender: self)

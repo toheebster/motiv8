@@ -20,37 +20,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //set which group the user is in
     func setUserGroup() {
-        let standard = UserDefaults.standard
+        let standards = UserDefaults.standard
         //change number here for testing
         let number = drand48() //generaters a number between 0 & 1
         // determine which group it is
-        standard.set(number, forKey: "number")
+        standards.set(number, forKey: "number")
         
         if number < 0.3 {
-            standard.set(1, forKey: "group")
+            standards.set(1, forKey: "group")
         } else if number >= 0.3 && number < 0.6 {
-            standard.set(2, forKey: "group")
+            standards.set(2, forKey: "group")
         } else {
-            standard.set(3, forKey: "group")
+            standards.set(3, forKey: "group")
         }
         
         print("user number is \(number)")
-        print("user group is \(standard.integer(forKey: "group"))")
+        print("user group is \(standards.integer(forKey: "group"))")
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let defaults = UserDefaults.standard
+        let standards = UserDefaults.standard
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         
         //if user completed both survey & consent
-        if((defaults.bool(forKey: "completedSurvey") == true) && (defaults.bool(forKey: "completedConsent") == true)){
+        if((standards.bool(forKey: "completedSurvey") == true) && (standards.bool(forKey: "completedConsent") == true)){
             let nav = self.window?.rootViewController as! UINavigationController
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             nav.pushViewController(storyboard.instantiateViewController(withIdentifier: "GoalVCID"), animated: false)
             print("Consent and survey completed")
-        } else if (defaults.bool(forKey: "completedConsent") == true) && (defaults.bool(forKey: "completedSurvey") == false){
+            print("user group is \(standards.integer(forKey: "group"))")
+        } else if (standards.bool(forKey: "completedConsent") == true) && (standards.bool(forKey: "completedSurvey") == false){
             print("Survey not completed")
             let navigation = self.window?.rootViewController as! UINavigationController
             let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -71,7 +72,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+//        UIAlertView(title: notification.alertTitle, message: notification.alertBody, delegate: nil, cancelButtonTitle: "OK").show()
+        let alert = UIAlertController(title: notification.alertTitle, message: notification.alertBody, preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
+            //db stuff
+        }
+        let noAction = UIAlertAction(title: "No", style: .default) { _ in
+            //db stuff
+        }
         
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
