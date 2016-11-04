@@ -65,7 +65,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="GoalCell" textLabel="IhO-iI-AyZ" detailTextLabel="Lo1-Nx-BhY" style="IBUITableViewCellStyleSubtitle" id="iyO-r9-S1U">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="54"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iyO-r9-S1U" id="a09-xK-vFz">
                                             <frame key="frameInset" width="342" height="54"/>
@@ -136,7 +136,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Description" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hZ6-AV-v5J" userLabel="Description Text View">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Details" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hZ6-AV-v5J" userLabel="Description Text View">
                                 <frame key="frameInset" minX="70" minY="149" width="236" height="80"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -203,24 +203,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOY-4c-5Km">
-                                <frame key="frameInset" minX="20" minY="201" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOY-4c-5Km">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Exn-at-OXI" userLabel="Goal Description Text View">
-                                <frame key="frameInset" minX="110" minY="201" width="474" height="62"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Lg-LB-042" userLabel="Date Text Field">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Lg-LB-042" userLabel="Date Text Field">
                                 <frame key="frameInset" minX="110" minY="297" width="470" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="GoalName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBd-db-6Rm">
-                                <frame key="frameInset" minX="116" minY="109" width="245" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GoalName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBd-db-6Rm">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="245" id="ziH-Zk-kqD"/>
                                 </constraints>
@@ -228,35 +221,41 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Goal Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2h-aD-DTS">
-                                <frame key="frameInset" minX="19" minY="297" width="80" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2h-aD-DTS">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Goal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFh-jg-IA2">
-                                <frame key="frameInset" minX="19" minY="110" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFh-jg-IA2">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Exn-at-OXI" userLabel="Goal Description Text View">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="238" id="xEU-oJ-Hnu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oFh-jg-IA2" firstAttribute="centerY" secondItem="PBd-db-6Rm" secondAttribute="centerY" id="43Y-y0-LPG"/>
-                            <constraint firstItem="Exn-at-OXI" firstAttribute="leading" secondItem="wOY-4c-5Km" secondAttribute="trailing" constant="11" id="9sn-wm-faM"/>
+                            <constraint firstItem="Exn-at-OXI" firstAttribute="leading" secondItem="wOY-4c-5Km" secondAttribute="trailing" constant="17" id="9sn-wm-faM"/>
                             <constraint firstItem="oFh-jg-IA2" firstAttribute="baseline" secondItem="PBd-db-6Rm" secondAttribute="baseline" id="FZ6-Sw-qDF"/>
                             <constraint firstItem="wOY-4c-5Km" firstAttribute="centerX" secondItem="V2h-aD-DTS" secondAttribute="centerX" id="GkX-uT-VCP"/>
                             <constraint firstItem="V2h-aD-DTS" firstAttribute="top" secondItem="wOY-4c-5Km" secondAttribute="bottom" constant="75" id="J9g-L4-UdT"/>
                             <constraint firstItem="oFh-jg-IA2" firstAttribute="centerX" secondItem="V2h-aD-DTS" secondAttribute="centerX" id="KxV-Ht-oDW"/>
-                            <constraint firstItem="Exn-at-OXI" firstAttribute="leading" secondItem="6Lg-LB-042" secondAttribute="leading" id="T5V-H1-wBh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Exn-at-OXI" secondAttribute="trailing" constant="5" id="QFV-V8-74C"/>
+                            <constraint firstItem="Exn-at-OXI" firstAttribute="leading" secondItem="6Lg-LB-042" secondAttribute="leading" constant="6" id="T5V-H1-wBh"/>
                             <constraint firstItem="oFh-jg-IA2" firstAttribute="leading" secondItem="V2h-aD-DTS" secondAttribute="leading" id="T68-Iy-pBK"/>
                             <constraint firstItem="V2h-aD-DTS" firstAttribute="top" secondItem="6Lg-LB-042" secondAttribute="top" id="WY2-Dg-BSC"/>
-                            <constraint firstItem="6Lg-LB-042" firstAttribute="top" secondItem="Exn-at-OXI" secondAttribute="bottom" constant="34" id="iku-O6-wEN"/>
+                            <constraint firstItem="6Lg-LB-042" firstAttribute="top" secondItem="Exn-at-OXI" secondAttribute="bottom" constant="41" id="iku-O6-wEN"/>
                             <constraint firstItem="wOY-4c-5Km" firstAttribute="top" secondItem="oFh-jg-IA2" secondAttribute="bottom" constant="70" id="lfJ-kF-l4M"/>
                             <constraint firstItem="PBd-db-6Rm" firstAttribute="leading" secondItem="oFh-jg-IA2" secondAttribute="trailing" constant="18" id="m8d-MT-t7Y"/>
-                            <constraint firstItem="PBd-db-6Rm" firstAttribute="top" secondItem="dzI-eQ-VXk" secondAttribute="bottom" constant="45" id="pDh-u8-Osn"/>
-                            <constraint firstItem="wOY-4c-5Km" firstAttribute="top" secondItem="Exn-at-OXI" secondAttribute="top" id="sE9-pJ-CT9"/>
+                            <constraint firstItem="PBd-db-6Rm" firstAttribute="top" secondItem="dzI-eQ-VXk" secondAttribute="bottom" constant="89" id="pDh-u8-Osn"/>
+                            <constraint firstItem="wOY-4c-5Km" firstAttribute="top" secondItem="Exn-at-OXI" secondAttribute="top" constant="7" id="sE9-pJ-CT9"/>
                             <constraint firstItem="wOY-4c-5Km" firstAttribute="trailing" secondItem="V2h-aD-DTS" secondAttribute="trailing" id="tcq-e7-zNP"/>
                         </constraints>
                     </view>
@@ -280,7 +279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HC2-C1-hWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3593" y="-319"/>
+            <point key="canvasLocation" x="3592.5" y="-319.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UrP-hs-DEL">

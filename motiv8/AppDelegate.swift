@@ -75,10 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIAlertView(title: notification.alertTitle, message: notification.alertBody, delegate: nil, cancelButtonTitle: "OK").show()
         let alert = UIAlertController(title: notification.alertTitle, message: notification.alertBody, preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in
-            //db stuff
+            //if group one, tell them how much they've completed
         }
         let noAction = UIAlertAction(title: "No", style: .default) { _ in
-            //db stuff
         }
         
         alert.addAction(yesAction)

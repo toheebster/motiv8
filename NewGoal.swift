@@ -47,10 +47,10 @@ class NewGoal: UIViewController {
 
     }
     
-    func createFeedbackNotification(goalId: String){
+    func createFeedbackNotification(goalId: String, goalName: String){
         let notification = UILocalNotification()
-        notification.alertBody = "Did you meet your daily exercise goal today?"
-        notification.alertTitle = "Motiv8"
+        notification.alertBody = "Did you complete \'\(goalName)\'"
+        notification.alertTitle = "Motiv8 Reminder"
         notification.alertAction = "respond"
         notification.fireDate = self.goalDueDate.date //change to reminder date
         notification.repeatInterval = NSCalendar.Unit.day
@@ -66,7 +66,7 @@ class NewGoal: UIViewController {
         let notification = UILocalNotification()
         notification.alertBody = "Remember to excercise"
         notification.alertAction = "open"
-        notification.alertTitle = "Motiv8"
+        notification.alertTitle = "Motiv8 Reminder"
         notification.fireDate = self.goalDueDate.date //change to reminder date
         notification.soundName = UILocalNotificationDefaultSoundName
         //assign unique identifiers to notification
@@ -85,6 +85,7 @@ class NewGoal: UIViewController {
         let entity = NSEntityDescription.entity(forEntityName: "Goal", in: managedContext)
         let goal = NSManagedObject(entity: entity!, insertInto: managedContext)
         
+        print(self.goalDescriptionTextView!.text!)
         goal.setValue(self.goalNameTextField!.text!, forKey: "goal_name")
         goal.setValue(self.goalDescriptionTextView!.text!, forKey: "goal_description")
         goal.setValue(self.goalDueDate.date, forKey: "goal_due_date")
@@ -103,7 +104,7 @@ class NewGoal: UIViewController {
         print(goalId)
 //         if either in group 1 or 2
         if(standards.integer(forKey: "group") < 3){
-            self.createFeedbackNotification(goalId: goalId)
+            self.createFeedbackNotification(goalId: goalId, goalName: goalNameTextField!.text!)
         } else {
             self.createGenericNotification(goalId: goalId)
         }

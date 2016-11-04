@@ -96,10 +96,13 @@ class GoalsDetails: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         let formatter:DateFormatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMMM, d, yyyy 'at' hh:mm a"
-        
+        formatter.dateFormat = "h:mm a"
+        print("view will appear")
+        print(self.goalName)
+        print(self.goalDescription)
         self.goalNameLabel!.text! = self.goalName
         self.descriptionLabel!.text! = self.goalDescription
+
         
         goalDueDate = UIDatePicker()
         goalDueDate.date = self.goalDate
@@ -112,9 +115,10 @@ class GoalsDetails: UIViewController {
     }
     
     func passGoal(_ goal: NSManagedObject, location: Int) {
-        goalName = (goal.value(forKey: "goal_name") as? String)!
-        goalDescription = (goal.value(forKey: "goal_description") as? String)!
-        goalDate = (goal.value(forKey: "goal_due_date") as? Date)!
+        self.goalName = (goal.value(forKey: "goal_name") as? String)!
+        self.goalDescription = (goal.value(forKey: "goal_description") as? String)!
+        print("pass goal called")
+        self.goalDate = (goal.value(forKey: "goal_due_date") as? Date)!
         self.goal = goal
         self.location = location
     }

@@ -103,11 +103,11 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         cell!.textLabel!.text = goal.value(forKey: "goal_name") as? String
         
         let formatter:DateFormatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMMM d"
+        formatter.dateFormat = "h:mm a"
         
         self.date = goal.value(forKey: "goal_due_date") as! Date
         self.goalDueDate = formatter.string(from: date)
-        cell.detailTextLabel?.text = "Due on: " + self.goalDueDate
+        cell.detailTextLabel?.text = "Reminder every day at: " + self.goalDueDate
 
         return cell
     }
@@ -170,7 +170,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         let goal = goals[(indexPath as NSIndexPath).row]
         self.goalName = goal.value(forKey: "goal_name") as! String
-        self.goalDescription = goal.value(forKey: "goal_name") as! String
+        self.goalDescription = goal.value(forKey: "goal_description") as! String
         self.date = goal.value(forKey: "goal_due_date") as! Date
         self.goalDueDate = formatter.string(from: date)
     }
