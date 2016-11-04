@@ -20,7 +20,7 @@ class NewGoal: UIViewController {
     var goals = [NSManagedObject]()
     var goalName = String()
     var goalDescription = String()
-    var goalDueDate: UIDatePicker!
+    var goalDueDate: UIDatePicker! //really just the reminder time
 
     @IBOutlet var goalNameTextField: UITextField!
     @IBOutlet weak var goalDescriptionTextView: UITextView!
@@ -36,7 +36,7 @@ class NewGoal: UIViewController {
         
         goalDueDate = UIDatePicker()
         goalDueDate.addTarget(self, action: #selector(NewGoal.addDate), for: UIControlEvents.valueChanged)
-        goalDueDate.datePickerMode = UIDatePickerMode.dateAndTime
+        goalDueDate.datePickerMode = UIDatePickerMode.time
         dateTextField.inputView = goalDueDate
         goalDescriptionTextView.becomeFirstResponder()
     }
@@ -47,12 +47,14 @@ class NewGoal: UIViewController {
 
     }
     
+    //pass in goal and use goal id as notifc.userinfo hahahhaha
     func createFeedbackNotification(){
         let notification = UILocalNotification()
-        notification.alertBody = "Did you exercise today?"
+        notification.alertBody = "Did you meet your daily exercise goal today?"
         notification.alertTitle = "Motiv8"
         notification.alertAction = "respond"
         notification.fireDate = self.goalDueDate.date //change to reminder date
+        notification.repeatInterval = NSCalendar.Unit.day
         notification.soundName = UILocalNotificationDefaultSoundName
         //assign unique identifiers to notification
         
@@ -62,7 +64,7 @@ class NewGoal: UIViewController {
     
     func createGenericNotification(){
         let notification = UILocalNotification()
-        notification.alertBody = "Don't forget to exercise today!"
+        notification.alertBody = "Remember to excercise"
         notification.alertAction = "open"
         notification.alertTitle = "Motiv8"
         notification.fireDate = self.goalDueDate.date //change to reminder date
@@ -73,7 +75,11 @@ class NewGoal: UIViewController {
         print("notification created")
     }
     
-    
+    func removeNotification(){
+        
+    }
+    //set badge numbers
+
     
     // SAVE NEW GOAL
     
@@ -102,10 +108,10 @@ class NewGoal: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
         // if either in group 1 or 2
-        if(defaults.double(forKey: "number") < Double(0.6)){
-            self.createFeedbackNotification()
+        if(defaults.integer(forKey: "group") < 3){
+            self.createFeedbackNotification(goal)
         } else {
-            self.createGenericNotification()
+            self.createGenericNotification(goal)
         }
 
     }

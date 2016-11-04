@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // group 2 = >3.3 & <6.6 -- precise goal no feedback
     // group 3 = >6.6 && < 1  -- vague goal no feedback
     
+    //set which group the user is in
     func setUserGroup() {
         let standard = UserDefaults.standard
         //change number here for testing
