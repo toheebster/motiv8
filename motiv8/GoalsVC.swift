@@ -182,7 +182,7 @@ class GoalsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             let indexPath = tableView.indexPathForSelectedRow
             let goal = goals[(indexPath! as NSIndexPath).row]
-            goalDetailsVC.passGoal(goal, location: (indexPath! as NSIndexPath).row)
+            goalDetailsVC.passGoal(goal, existingDate: self.date, location: (indexPath! as NSIndexPath).row)
     
         } else {
             
